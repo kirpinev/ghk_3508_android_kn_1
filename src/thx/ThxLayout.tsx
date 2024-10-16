@@ -33,9 +33,9 @@ export const ThxLayout = () => {
         <ButtonMobile
           block
           view="primary"
-          href="alfabank:///dashboard/alfa_check_cards"
+          href="alfabank://multistep-route?fromModule=FORM&stepNumber=0&alias=alfa-subscription-alias"
         >
-          Хорошо
+          Не Хорошо
         </ButtonMobile>
       </div>
     </>
