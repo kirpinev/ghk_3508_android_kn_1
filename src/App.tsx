@@ -1,7 +1,6 @@
 import { ButtonMobile } from "@alfalab/core-components/button/mobile";
 
 import { Typography } from "@alfalab/core-components/typography";
-import { useState } from "react";
 import smart from "./assets/smart.png";
 import smile from "./assets/smile.png";
 import drums from "./assets/drums.png";
@@ -73,23 +72,11 @@ const products: Array<Product> = [
 ];
 
 export const App = () => {
-  const [loading, setLoading] = useState(false);
-  const [thxShow, setThx] = useState(LS.getItem(LSKeys.ShowThx, false));
-
   const submit = () => {
-    setLoading(true);
-    // sendDataToGA({
-    //   sub_choice: selectedOption,
-    //   sub_hidden: expanded ? "Yes" : "No",
-    // });
-    Promise.resolve().then(() => {
-      LS.setItem(LSKeys.ShowThx, true);
-      setThx(true);
-      setLoading(false);
-    });
+    LS.setItem(LSKeys.ShowThx, true);
   };
 
-  if (thxShow) {
+  if (LS.getItem(LSKeys.ShowThx, false)) {
     return <ThxLayout />;
   }
 
@@ -136,7 +123,7 @@ export const App = () => {
           </Typography.TitleResponsive>
 
           {products.map((product) => (
-            <div className={appSt.product}>
+            <div className={appSt.product} key={product.title}>
               <div>
                 <Typography.TitleResponsive
                   font="system"
@@ -172,7 +159,12 @@ export const App = () => {
       <Gap size={72} />
 
       <div className={appSt.bottomBtn}>
-        <ButtonMobile loading={loading} block view="primary" onClick={submit}>
+        <ButtonMobile
+          block
+          view="primary"
+          href="alfabank://multistep-route?fromModule=FORM&alias=alfa-subscription-alias&version=2"
+          onClick={submit}
+        >
           Подключить
         </ButtonMobile>
       </div>
