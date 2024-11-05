@@ -72,8 +72,15 @@ const products: Array<Product> = [
 ];
 
 export const App = () => {
+  const clickSubmit = () => {
+    window.gtag("event", "connect_click", {
+      variant_name: "ghk_3508_android_kn_1",
+    });
+  };
+
   const submit = () => {
     LS.setItem(LSKeys.ShowThx, true);
+    clickSubmit();
   };
 
   if (LS.getItem(LSKeys.ShowThx, false)) {
